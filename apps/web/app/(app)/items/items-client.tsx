@@ -25,16 +25,12 @@ interface ItemsClientProps {
 }
 
 export default function ItemsClient({ posts = [] }: ItemsClientProps) {
-  const { data, error, isLoading } = useSWR<Item[]>(
-    "https://api.vercel.app/blog",
-    fetcher,
-    {
-      suspense: true, // SSR에서 쓰려면 fallbackData 필요
-      fallbackData: posts, // 서버가 준 초기 데이터
-      revalidateOnMount: true, // 클라에서 즉시 최신화(원하면 false로)
-      shouldRetryOnError: false,
-    },
-  );
+  const { data, error, isLoading } = useSWR<Item[]>("/api/blog", fetcher, {
+    suspense: true, // SSR에서 쓰려면 fallbackData 필요
+    fallbackData: posts, // 서버가 준 초기 데이터
+    revalidateOnMount: true, // 클라에서 즉시 최신화(원하면 false로)
+    shouldRetryOnError: false,
+  });
 
   console.log("DATA ==>>", data);
 

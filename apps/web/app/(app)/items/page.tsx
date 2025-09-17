@@ -21,11 +21,14 @@ export default async function ItemsPage() {
 
   return (
     <Suspense fallback={<div>LLLLLL</div>}>
-      <ul>
-        {posts.map((post: Item) => (
-          <li key={post.id}>{post.title}</li>
-        ))}
-      </ul>
+      <section>
+        <h1>Server Component</h1>
+        <ul>
+          {posts.map((post: Item) => (
+            <li key={post.id}>{post.title}</li>
+          ))}
+        </ul>
+      </section>
 
       <ItemsClient posts={posts} />
       <h1 className="text-2xl font-bold">Welcome, {user?.username}!</h1>
