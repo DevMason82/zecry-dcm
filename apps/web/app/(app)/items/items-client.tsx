@@ -3,7 +3,7 @@
 import useSWR from "swr";
 import { useUI } from "@/lib/store/ui";
 
-type Item = {
+export type Item = {
   id: number;
   title: string;
   content: string;
@@ -12,9 +12,19 @@ type Item = {
   category: string;
 };
 
-const fetcher = (url) => fetch(url).then((r) => r.json());
+// fetcher의 반환 타입을 명시해주면 SWR 제네릭과 일치해 타입 안정성이 좋아집니다.
+const fetcher = async (url: string): Promise<Item[]> => {
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
+  return res.json();
+};
 
-export default function ItemsClient({ posts }) {
+interface ItemsClientProps {
+  /** SSR에서 내려주는 초기 데이터 (옵션) */
+  posts?: Item[];
+}
+
+export default function ItemsClient({ posts = [] }: ItemsClientProps) {
   const { data, error, isLoading } = useSWR<Item[]>(
     "https://api.vercel.app/blog",
     fetcher,
