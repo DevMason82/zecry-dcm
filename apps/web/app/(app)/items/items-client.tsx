@@ -3,14 +3,30 @@
 import useSWR from "swr";
 import { useUI } from "@/lib/store/ui";
 
-type Item = { id: string; title: string };
+type Item = {
+  id: number;
+  title: string;
+  content: string;
+  author: string;
+  date: string;
+  category: string;
+};
 
-export default function ItemsClient({ initial }: { initial: Item[] }) {
-  const { data, error, isLoading } = useSWR<Item[]>("/api/items", {
-    suspense: true, // SSR에서 쓰려면 fallbackData 필요
-    fallbackData: initial, // 서버가 준 초기 데이터
-    revalidateOnMount: true, // 클라에서 즉시 최신화(원하면 false로)
-  });
+const fetcher = (url) => fetch(url).then((r) => r.json());
+
+export default function ItemsClient({ posts }) {
+  const { data, error, isLoading } = useSWR<Item[]>(
+    "https://api.vercel.app/blog",
+    fetcher,
+    {
+      suspense: true, // SSR에서 쓰려면 fallbackData 필요
+      fallbackData: posts, // 서버가 준 초기 데이터
+      revalidateOnMount: true, // 클라에서 즉시 최신화(원하면 false로)
+      shouldRetryOnError: false,
+    },
+  );
+
+  console.log("DATA ==>>", data);
 
   const { modalOpen, openModal, closeModal } = useUI();
 
@@ -19,11 +35,14 @@ export default function ItemsClient({ initial }: { initial: Item[] }) {
 
   return (
     <>
-      <ul className="list-disc pl-5">
-        {data!.map((i) => (
-          <li key={i.id}>{i.title}</li>
-        ))}
-      </ul>
+      <section>
+        <h1>Client Component</h1>
+        <ul className="list-disc pl-5">
+          {data!.map((i) => (
+            <li key={i.id}>{i.title}</li>
+          ))}
+        </ul>
+      </section>
 
       <button
         onClick={openModal}

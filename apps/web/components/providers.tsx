@@ -8,6 +8,7 @@ import {
 } from "@workspace/ui/components/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import { SWRProvider } from "@/components/swr-provider";
+import { bgCyan } from "next/dist/lib/picocolors";
 
 export async function Providers({ children }: { children: React.ReactNode }) {
   const cookieStore = await cookies();
@@ -25,7 +26,7 @@ export async function Providers({ children }: { children: React.ReactNode }) {
         <Suspense fallback={<div className="opacity-70 p-4">Loading...</div>}>
           <SidebarProvider defaultOpen={defaultOpen}>
             <AppSidebar />
-            <main>
+            <main className="w-full flex-1 p-6 overflow-y-auto bg-background text-foreground">
               <SidebarTrigger />
               {children}
             </main>
