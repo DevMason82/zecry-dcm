@@ -2,6 +2,7 @@
 import * as React from "react";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Geist, Geist_Mono } from "next/font/google";
+import { ProvidersNoSidebar } from "@/components/providers-no-sidebar";
 
 const fontSans = Geist({
   subsets: ["latin"],
@@ -19,17 +20,8 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
-        <body
-          className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased `}
-        >
-          <main className="w-full flex-1 p-6 overflow-y-auto bg-background text-foreground">
-            {/* 중앙 정렬 영역 */}
-            <div className="w-full max-w-md">{children}</div>
-          </main>
-        </body>
-      </html>
-    </ClerkProvider>
+    <main className="w-full h-svh flex items-center justify-center overflow-y-auto bg-background text-foreground">
+      {children}
+    </main>
   );
 }

@@ -14,9 +14,18 @@ export default async function Page() {
   return (
     <div className="flex items-center justify-center min-h-svh">
       <div className="flex flex-col items-center justify-center gap-4">
-        <h1 className="text-2xl font-bold">Welcome, {user?.username}!</h1>
-        {/*<Button size="sm">Button</Button>*/}
-        <SignOutButton />
+        <h1 className="text-2xl font-bold text-amber-400">
+          Welcome, {user?.username}!
+        </h1>
+
+        <Button size="lg" variant="secondary">
+          Button
+        </Button>
+        <SignOutButton>
+          <Button size="sm" variant="outline">
+            Sign Out
+          </Button>
+        </SignOutButton>
       </div>
     </div>
   );
