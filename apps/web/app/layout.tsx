@@ -16,10 +16,22 @@ const fontMono = Geist_Mono({
   variable: "--font-mono",
 });
 
-export default function AppLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <Providers>{children}</Providers>;
+  return (
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body
+          className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased `}
+        >
+          <main className="flex flex-col items-center justify-center">
+            {children}
+          </main>
+        </body>
+      </html>
+    </ClerkProvider>
+  );
 }

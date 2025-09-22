@@ -9,7 +9,11 @@ import {
 import { AppSidebar } from "@/components/app-sidebar";
 import { SWRProvider } from "@/components/swr-provider";
 
-export async function Providers({ children }: { children: React.ReactNode }) {
+export async function ProvidersNoSidebar({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const cookieStore = await cookies();
   const defaultOpen = cookieStore.get("sidebar_state")?.value === "true";
   return (
@@ -21,12 +25,11 @@ export async function Providers({ children }: { children: React.ReactNode }) {
       enableColorScheme
     >
       <SWRProvider>
-        {/* 전역 suspense: 각 route의 loading.tsx가 있으면 그게 우선 */}
+        {/*전역 suspense: 각 route의 loading.tsx가 있으면 그게 우선 */}
         <Suspense fallback={<div className="opacity-70 p-4">Loading...</div>}>
           <SidebarProvider defaultOpen={defaultOpen}>
             <AppSidebar />
-            <main className="w-full flex-1 p-6 overflow-y-auto bg-background text-foreground">
-              <SidebarTrigger />
+            <main className="flex justify-center p-6 overflow-y-auto bg-amber-100 w-[300px] text-foreground">
               {children}
             </main>
           </SidebarProvider>
