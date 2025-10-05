@@ -1,6 +1,11 @@
 "use client";
 
-import { ChevronRight, type LucideIcon } from "lucide-react";
+import {
+  AirplayIcon,
+  ChevronRight,
+  LayoutDashboardIcon,
+  type LucideIcon,
+} from "lucide-react";
 
 import {
   Collapsible,
@@ -38,7 +43,23 @@ export function NavMain({
   const pathname = usePathname();
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Platform</SidebarGroupLabel>
+      {/*<SidebarGroupLabel>Platform</SidebarGroupLabel>*/}
+      <SidebarMenu>
+        <SidebarMenuItem>
+          <SidebarMenuButton asChild>
+            <Link
+              href="/"
+              className={cn(
+                "justify-start",
+                pathname === "/" && "bg-accent text-accent-foreground",
+              )}
+            >
+              <LayoutDashboardIcon />
+              <span>Dashboard</span>
+            </Link>
+          </SidebarMenuButton>
+        </SidebarMenuItem>
+      </SidebarMenu>
       <SidebarMenu>
         {items.map((item) => (
           <Collapsible

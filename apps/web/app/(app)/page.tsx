@@ -30,21 +30,6 @@ export default async function Page() {
 
         <Qa />
       </div>
-
-      <div>
-        <h1 className="text-2xl font-bold text-amber-400">
-          Welcome, {user?.username}!
-        </h1>
-
-        <Button size="lg" variant="secondary">
-          Button
-        </Button>
-        <SignOutButton>
-          <Button size="sm" variant="outline">
-            Sign Out
-          </Button>
-        </SignOutButton>
-      </div>
     </div>
   );
 }
