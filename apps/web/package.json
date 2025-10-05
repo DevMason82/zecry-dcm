@@ -12,6 +12,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@bprogress/next": "^3.2.12",
     "@clerk/nextjs": "^6.32.0",
     "@tanstack/react-table": "^8.21.3",
     "@workspace/ui": "workspace:*",

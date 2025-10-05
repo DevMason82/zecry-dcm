@@ -1,10 +1,9 @@
 import { Geist, Geist_Mono } from "next/font/google";
 
 import "@workspace/ui/styles/globals.css";
-import { Providers } from "@/components/providers";
-import { cookies } from "next/headers";
 import * as React from "react";
 import { ClerkProvider } from "@clerk/nextjs";
+import ProgressProviders from "@/components/progress-provider";
 
 const fontSans = Geist({
   subsets: ["latin"],
@@ -27,9 +26,11 @@ export default function RootLayout({
         <body
           className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased `}
         >
-          <main className="flex flex-col items-center justify-center">
-            {children}
-          </main>
+          <ProgressProviders>
+            <main className="flex flex-col items-center justify-center">
+              {children}
+            </main>
+          </ProgressProviders>
         </body>
       </html>
     </ClerkProvider>

@@ -19,7 +19,7 @@ export const menuDatas = {
   },
   teams: [
     {
-      name: "Acme Inc",
+      name: "Jecry",
       logo: GalleryVerticalEnd,
       plan: "Enterprise",
     },
@@ -37,16 +37,16 @@ export const menuDatas = {
   navMain: [
     {
       title: "Master",
-      url: "/",
+      url: "#",
       icon: SquareTerminal,
       isActive: true,
       items: [
         {
-          title: "매출처관리",
-          url: "/",
+          title: "매출처 관리",
+          url: "/sales-account-manager",
         },
         {
-          title: "배송사관리",
+          title: "배송사 관리",
           url: "/items",
         },
         {
