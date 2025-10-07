@@ -9,14 +9,6 @@ import {
   CardTitle,
 } from "@workspace/ui/components/card";
 import Link from "next/link";
-import { ChevronRightIcon } from "lucide-react";
-import {
-  Item,
-  ItemActions,
-  ItemContent,
-  ItemDescription,
-  ItemTitle,
-} from "@workspace/ui/components/item";
 import NoticeRow from "@/components/dashboard/notice/noticeRow";
 
 const Index = () => {
@@ -40,12 +32,6 @@ const Index = () => {
           <li>
             <NoticeRow />
           </li>
-          {/*<li>*/}
-          {/*  <NoticeRow />*/}
-          {/*</li>*/}
-          {/*<li>*/}
-          {/*  <NoticeRow />*/}
-          {/*</li>*/}
         </ul>
       </CardContent>
     </Card>
