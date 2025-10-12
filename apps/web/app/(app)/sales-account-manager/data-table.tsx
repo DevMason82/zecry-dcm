@@ -21,21 +21,70 @@ import {
   TableRow,
 } from "@workspace/ui/components/table";
 import { Input } from "@workspace/ui/components/input";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { DataTablePagination } from "@/components/data-table-pagination";
+import { Product } from "@/types/product";
+
+type ProductsResponse = {
+  products: Product[];
+  total: number;
+  skip: number;
+  limit: number;
+};
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  // data: ProductsResponse;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  // 서버가 내려준 첫 페이지 상태
+  // const [pageSize, setPageSize] = useState(data.limit);
+  // const [pageIndex, setPageIndex] = useState(0);
+  // const [rows, setRows] = useState<Product[]>(data);
+  // const [total, setTotal] = useState(data.total);
+  // const [loading, setLoading] = useState(false);
+
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [rowSelection, setRowSelection] = useState({});
+
+  // useEffect(() => {
+  //   // SSR로 받은 첫 페이지(0번 페이지)는 재요청 불필요
+  //   if (pageIndex === 0 && pageSize === data.limit) return;
+  //
+  //   let active = true;
+  //   (async () => {
+  //     setLoading(true);
+  //     try {
+  //       const skip = pageIndex * pageSize;
+  //       const res = await fetch(
+  //         `/api/products?limit=${pageSize}&skip=${skip}`,
+  //         {
+  //           cache: "no-store",
+  //         },
+  //       );
+  //       if (!res.ok) throw new Error("Failed to fetch page");
+  //       const json = (await res.json()) as ProductsResponse;
+  //       if (!active) return;
+  //       setRows(json.products);
+  //       setTotal(json.total);
+  //     } catch (e) {
+  //       console.error(e);
+  //     } finally {
+  //       if (active) setLoading(false);
+  //     }
+  //   })();
+  //
+  //   return () => {
+  //     active = false;
+  //   };
+  // }, [pageIndex, pageSize, data.limit]);
+
   const table = useReactTable({
     data,
     columns,
@@ -58,9 +107,9 @@ export function DataTable<TData, TValue>({
       <div className="flex items-center py-4">
         <Input
           placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+          value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
+            table.getColumn("title")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />

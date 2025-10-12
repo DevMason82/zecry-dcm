@@ -26,10 +26,11 @@ export async function Providers({ children }: { children: React.ReactNode }) {
         <Suspense fallback={<div className="opacity-70 p-4">Loading...</div>}>
           <SidebarProvider defaultOpen={defaultOpen}>
             <AppSidebar />
-            <main className="w-full flex-1 pb-6 overflow-y-auto bg-background text-foreground">
+
+            <main className="w-full flex-1 overflow-y-auto bg-background text-foreground">
               <Header />
               <SidebarTrigger />
-              {children}
+              <div className="p-6">{children}</div>
             </main>
           </SidebarProvider>
         </Suspense>
