@@ -144,67 +144,69 @@ const ProductTableClient = ({
       </div>
 
       {/* 테이블 */}
-      <div className="rounded-xl border overflow-auto">
-        <Table className="min-w-[900px]">
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-[72px]">Preview</TableHead>
-              <TableHead>Title</TableHead>
-              <TableHead>Brand</TableHead>
-              <TableHead>Category</TableHead>
-              <TableHead className="text-right">Price</TableHead>
-              <TableHead className="text-right">Rating</TableHead>
-              <TableHead className="text-right">Stock</TableHead>
-            </TableRow>
-          </TableHeader>
+      <div className={isLoading ? "loading" : ""}>
+        <div className="rounded-xl border overflow-auto">
+          <Table className="min-w-[900px]">
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[72px]">Preview</TableHead>
+                <TableHead>Title</TableHead>
+                <TableHead>Brand</TableHead>
+                <TableHead>Category</TableHead>
+                <TableHead className="text-right">Price</TableHead>
+                <TableHead className="text-right">Rating</TableHead>
+                <TableHead className="text-right">Stock</TableHead>
+              </TableRow>
+            </TableHeader>
 
-          <TableBody>
-            {error ? (
-              <TableRow>
-                <TableCell
-                  colSpan={7}
-                  className="text-center py-10 text-red-600"
-                >
-                  Failed to load
-                </TableCell>
-              </TableRow>
-            ) : isLoading && !data ? (
-              <TableRow>
-                <TableCell colSpan={7} className="text-center py-10">
-                  Loading...
-                </TableCell>
-              </TableRow>
-            ) : rows.length ? (
-              rows.map((p) => (
-                <TableRow key={p.id} className="hover:bg-muted/40">
-                  <TableCell>
-                    <img
-                      src={p.thumbnail}
-                      alt={p.title}
-                      className="w-14 h-14 object-cover rounded-lg"
-                    />
+            <TableBody>
+              {error ? (
+                <TableRow>
+                  <TableCell
+                    colSpan={7}
+                    className="text-center py-10 text-red-600"
+                  >
+                    Failed to load
                   </TableCell>
-                  <TableCell className="font-medium">{p.title}</TableCell>
-                  <TableCell>{p.brand}</TableCell>
-                  <TableCell>{p.category}</TableCell>
-                  <TableCell className="text-right">
-                    ${p.price.toFixed(2)}
-                  </TableCell>
-                  <TableCell className="text-right">
-                    {p.rating.toFixed(2)}
-                  </TableCell>
-                  <TableCell className="text-right">{p.stock}</TableCell>
                 </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan={7} className="text-center py-10">
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
+              ) : isLoading && !data ? (
+                <TableRow>
+                  <TableCell colSpan={7} className="text-center py-10">
+                    Loading...
+                  </TableCell>
+                </TableRow>
+              ) : rows.length ? (
+                rows.map((p) => (
+                  <TableRow key={p.id} className="hover:bg-muted/40">
+                    <TableCell>
+                      <img
+                        src={p.thumbnail}
+                        alt={p.title}
+                        className="w-14 h-14 object-cover rounded-lg"
+                      />
+                    </TableCell>
+                    <TableCell className="font-medium">{p.title}</TableCell>
+                    <TableCell>{p.brand}</TableCell>
+                    <TableCell>{p.category}</TableCell>
+                    <TableCell className="text-right">
+                      ${p.price.toFixed(2)}
+                    </TableCell>
+                    <TableCell className="text-right">
+                      {p.rating.toFixed(2)}
+                    </TableCell>
+                    <TableCell className="text-right">{p.stock}</TableCell>
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={7} className="text-center py-10">
+                    No results.
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </div>
       </div>
     </section>
   );
